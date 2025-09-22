@@ -1,23 +1,15 @@
-
 # Fichier de configuration pour Nixpacks
-# https://nixpacks.com/docs/configuration/file
 
-# On force Nixpacks à utiliser les environnements PHP et Node.js
 providers = ["php", "node"]
 
 [phases.install]
-# On installe les dépendances PHP (pour la production)
-# puis les dépendances Node.js
 cmds = [
     "composer install --no-dev --optimize-autoloader", 
     "npm install"
 ]
 
 [phases.build]
-# On compile les assets (CSS, JS) avec Vite/Mix
 cmds = ["npm run build"]
 
 [start]
-# Commande pour démarrer le serveur web (Apache)
-# et lui dire que la racine du site est le dossier /public
 cmd = "heroku-php-apache2 public/"
